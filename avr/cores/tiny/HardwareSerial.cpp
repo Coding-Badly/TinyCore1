@@ -82,10 +82,11 @@ inline void store_char(unsigned char c, ring_buffer *rx_buffer)
 #if defined(USART_RX_vect)
   ISR(USART_RX_vect)
   {
-  #if defined(UDR0)
-    unsigned char c  =  UDR0;
-  #elif defined(UDR)
+    // http://forum.arduino.cc/index.php?topic=324354.msg2244340#msg2244340
+  #if defined(UDR)
     unsigned char c  =  UDR;  //  atmega8535
+  #elif defined(UDR0)
+    unsigned char c  =  UDR0;
   #else
     #error UDR not defined
   #endif
